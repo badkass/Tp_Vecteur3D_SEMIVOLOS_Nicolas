@@ -2,7 +2,11 @@
 using namespace std;
 
 template <class T> class vect3D {
-	T m_x, m_y, m_z;
+	
+private:
+		T m_z;
+protected:
+		T m_x, m_y;
 
 public:
 	vect3D(T x = 0, T y = 0, T z = 0);
@@ -27,7 +31,7 @@ public:
 	void affiche() const;
 
 	//Surcharge opérateur
-	void operator=(const vect3D& vect);
+	vect3D<T>& operator=(const vect3D& vect);
 	vect3D<T> operator+(const vect3D& vect);
 	vect3D<T> operator-(const vect3D& vect);
 	vect3D<T> operator*(const T scale);
@@ -57,7 +61,6 @@ inline vect3D<T>::vect3D(T x, T y, T z)
 	m_y = y;
 	m_z = z;
 }
-
 
 template<class T>
 inline vect3D<T>::vect3D(vect3D& vect)
@@ -116,11 +119,13 @@ inline void vect3D<T>::affiche() const
 //Surcharge opérateur
 
 template<class T>
-inline void vect3D<T>::operator=(const vect3D& vect)
+inline vect3D<T>& vect3D<T>::operator=(const vect3D& vect)
 {
 	m_x = vect.m_x;
 	m_y = vect.m_y;
 	m_z = vect.m_z;
+
+	return *this;
 }
 
 //addition
